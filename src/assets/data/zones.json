@@ -1,0 +1,66 @@
+[
+      {
+            "zone_id": "zone1",         
+            "stope_name": "stope1",
+            "color": "#00CC00",
+            "number_of_people": "56",
+            "manager": "Alex John",
+            "temperature": 35,
+            "humidity": 20,
+            "mobile_assets": "5"
+      },
+       {
+            "zone_id": "zone2",
+            "stope_name": "stope2",
+            "color": "#00CC00",
+            "number_of_people": "56",
+            "manager": "Alex John",
+            "temperature": 35,
+            "humidity": 20,
+            "mobile_assets": "5"
+      },
+      {
+            "zone_id": "zone3",         
+            "stope_name": "stope3",
+            "color": "#00CC00",
+            "number_of_people": "56",
+            "manager": "Alex John",
+            "temperature": 35,
+            "humidity": 20,
+            "mobile_assets": "5"
+      },
+       {
+            "zone_id": "zone4",
+            "stope_name": "stope4",
+            "color": "#00CC00",
+            "number_of_people": "56",
+            "manager": "Alex John",
+            "temperature": 35,
+            "humidity": 20,
+            "mobile_assets": "5"
+      },
+
+{
+            "zone_id": "zone5",         
+            "stope_name": "stope5",
+            "color": "#00CC00",
+            "number_of_people": "56",
+            "manager": "Alex John",
+            "temperature": 35,
+            "humidity": 20,
+            "mobile_assets": "5"
+      },
+       {
+            "zone_id": "zone6",
+            "stope_name": "stope6",
+            "color": "#00CC00",
+            "number_of_people": "56",
+            "manager": "Alex John",
+            "temperature": 35,
+            "humidity": 20,
+            "mobile_assets": "5"
+      }
+
+
+
+]

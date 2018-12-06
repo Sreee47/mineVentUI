@@ -1,0 +1,145 @@
+<div class="row" style="align-content: center">
+  <div class="col-md-9">
+  </div>
+  <div class="col-md-3" ng-app ng-controller="Ctrl" style="color: white">
+
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 grid" >
+    <br>
+    <div class="row">
+<div class= "col-md-6">
+     <div class = "row">
+       <div class = "col-md-4">
+        <nb-card style="width: 100px!important; cursor: pointer; height: 65px;" (click)="openModal(zone.name)">
+                <nb-card-body style="overflow: hidden">
+                   <div class="row" style="text-align: center">
+                   <div class="col-md-4">
+                     <img src="../../assets/images/workers.png" style="margin-left: -10px">
+                   </div>
+                   <div class="col-md-8" title="Workers : {{zone.number}}" style="margin-left: -10px; font-size: 45px; margin-top: -18px">
+                      <b>{{zone.number}}</b>
+                    </div>
+                  </div>
+                 </nb-card-body>
+               </nb-card>
+                <nb-card style="width: 100px!important">
+                    <nb-card-body>
+                        <div class="row">
+                            <div class="col-md-4">
+                              <img src="../../assets/images/supervisor.png" style="margin-left: -10px">
+                            </div>
+                            <div class="col-md-8" title="Supervisor : {{zone.manager}}" style="font-size: 13px; margin-left: -10px">
+                                {{zone.manager}}
+                             </div>
+                           </div>
+                    </nb-card-body>
+                  </nb-card>
+                </div>
+                <div class = "col-md-4">
+                   <nb-card style="width: 100px!important; height: 65px">
+                    <nb-card-body style="overflow: hidden">
+                        <div class="row">
+                            <div class="col-md-4" >
+                              <img src="../../assets/images/thermometer.png" style="margin-left: -15px; margin-top: -5px;">
+                            </div>
+                            <div class="col-md-8" title="Temperature : {{zone.temperature}} °C" style="margin-left: -10px; font-size: 45px; margin-top: -18px" [ngStyle]="{'color':zone.temperature >60 ? 'red' : 'green' }">
+                                <b >{{zone.temperature}} </b>
+                                <!-- °C -->
+                             </div>
+                           </div>
+                    </nb-card-body>
+                  </nb-card>
+                   <nb-card style="width: 100px!important; height: 65px">
+                    <nb-card-body style="overflow: hidden">
+                        <div class="row">
+                            <div class="col-md-4">
+                              <img src="../../assets/images/gauge.png" style="margin-left: -10px">
+                            </div>
+                            <div class="col-md-8" title="Pressure : {{zone.pressure}} Pa" style="margin-left: -10px; font-size: 45px; margin-top: -18px; color: green">
+                                <b>{{zone.pressure}}</b>
+                                 <!-- Pa -->
+                             </div>
+                           </div>
+                    </nb-card-body>
+                  </nb-card>
+                </div>
+                  <nb-card style="width: 100px!important; cursor: pointer; height: 65px" (click)="assetclicked(zone.asset)">
+                    <nb-card-body style="overflow: hidden">
+                        <div class="row">
+                            <div class="col-md-4">
+                              <img src="../../assets/images/gauge.png" style="margin-left: -10px">
+                            </div>
+                            <div class="col-md-8" title="Asset : {{zone.asset}} Pa" style="margin-left: -10px; font-size: 45px; margin-top: -18px; color: green">
+                                <b>{{zone.asset}}</b>
+                                 <!-- Pa -->
+                             </div>
+                           </div>
+                    </nb-card-body>
+                  </nb-card>
+     </div>
+</div>
+<div class = "col-md-3">
+
+         <!-- <button (click)="openGasModal()" style="align-content:center;border-radius: 10px;background: #B2FF59">GAS STATUS</button>  -->
+         <div id="{{zone.mapid}}" (click)="openGasModal(zone.mapid)" ></div> 
+         <div  style="color:rgb(180, 179, 179); padding-left:69px; font-size:12px">Gas Level</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div  class="col-md-12" id="tableblock">
+    <table *ngIf="tabselected=='workers'" style="width:100%; border: rgb(136, 133, 133)" border="1">
+      <tr class="names">
+        <th style="text-align:center; color:white">Name</th>
+        <th style="text-align:center; color:white">Role</th>
+        <th style="text-align:center; color:white">Availibilty</th>
+        <th style="text-align:center; color:white">Last Updated On</th>
+        <th style="text-align:center; color:white">Change in Stope</th>
+        <th style="text-align:center; color:white">In Mine Hrs</th>
+      </tr>
+      
+      <tr  *ngFor='let worker of zoneWorkers; let i =index' class="names">
+        <td align="center"><div style="color:white">{{worker.name}}
+          <div *ngIf="alert"><div *ngIf="worker.zone=='zone_4'">
+            <i class="fa fa-check-circle" *ngIf="checkStatus(worker.status)" style="color:green"></i>
+            <i class="fa fa-check-circle" *ngIf="!checkStatus(worker.status)" style="color:grey"></i>
+          </div></div></div></td>
+        <td align="center"><div style="color:white">{{worker.role}}</div></td>
+        <td *ngIf="worker.status=='online'" align="center"><i class="fa fa-circle" style="font-size:15px;color:green"></i></td>
+        <td *ngIf="worker.status=='away'" align="center"><i class="fa fa-circle" style="font-size:15px;color:orange"></i></td>
+        <td *ngIf="worker.status=='unknown'" align="center"><i class="fa fa-circle" style="font-size:15px;color:grey"></i></td>
+        <td align="center"><div style="color:white">{{worker.time}}</div></td>
+        <td *ngIf="worker.rightZone" align="center" ><div style="color: white">{{worker.level}}</div></td>
+        <td *ngIf="!worker.rightZone" align="center" ><div style="color: white; border-style: outset; border-color: #FF6666">{{worker.level}}</div></td>
+        <td *ngIf="checkValue(worker.hrs)==3" align="center" ><div style="color: white; border-style: outset; border-color: #FF6666">{{worker.hrs}}</div></td>
+        <td *ngIf="checkValue(worker.hrs)==2" align="center" ><div style="color: white; border-style: outset; border-color: orange">{{worker.hrs}}</div></td>
+        <td *ngIf="checkValue(worker.hrs)==1" align="center" ><div style="color: white; border-style: outset; border-color: green">{{worker.hrs}}</div></td>
+         
+
+      </tr>
+    </table>
+
+    <table *ngIf="tabselected=='gaslevels'" style="width:100%">
+      <tr *ngFor='let zone of zoneGasLevels'>
+        <td><h5 style="font-family:'Roboto';font-size:18px; margin-top:-35px">O2</h5></td>
+        <!-- <td><h5>:</h5></td>
+        <td><h5>{{zone.O2}}</h5></td> -->
+        <td><meter id="meter" min="0" max="100" low="25" high="75" optimum="100" value="{{zone.O2}}"></meter> <h5 style="font-family:'Roboto';font-size:15px">{{zone.O2}}%</h5><br></td>
+      </tr>
+      <tr *ngFor='let zone of zoneGasLevels'>
+        <td><h5 style="font-family:'Roboto';font-size:18px; margin-top:-35px">SO2</h5></td>
+        <td><meter id="meter" min="0" max="100" low="25" high="75" optimum="100" value="{{zone.SO2}}"></meter> <h5 style="font-family:'Roboto';font-size:15px" >{{zone.SO2}}%</h5><br></td>
+        
+      </tr>
+      <tr *ngFor='let zone of zoneGasLevels'>
+        <td><h5 style="font-family:'Roboto';font-size:18px; margin-top:-35px">CO</h5></td>
+        <td><meter id="meter" min="0" max="100" low="25" high="75" optimum="100" value="{{zone.CO}}"></meter> <h5 style="font-family:'Roboto';font-size:15px">{{zone.CO}}%</h5><br></td>
+      </tr>
+    </table>
+    </div>
+
+
+</div>
